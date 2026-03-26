@@ -6,8 +6,8 @@ A simple and intuitive Todo List application built with Angular and Django REST 
 
 | Name | Role |
 |------|------|
-| David Sebelev | Frontend (Angular) |
-| Ruslan Ibrayev | Backend (Django) |
+| David Sebelev | Backend (Django)|
+| Ruslan Ibrayev | Frontend (Angular) |
 
 ## 🛠️ Tech Stack
 
