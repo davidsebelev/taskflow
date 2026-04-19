@@ -23,3 +23,20 @@ class TaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
         fields = '__all__'
+
+
+
+
+#Сustom serializers
+
+
+class LoginSerializer(serializers.Serializer):
+    username = serializers.CharField(max_length=150)
+    password = serializers.CharField(write_only = True)
+
+
+class TaskStatusSerializer(serializers.Serializer):
+    is_active = serializers.BooleanField()
+    completed = serializers.BooleanField()
+
+
