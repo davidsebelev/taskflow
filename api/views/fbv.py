@@ -8,6 +8,7 @@ from rest_framework import status
 
 from ..serializers import LoginSerializer
 
+from rest_framework_simplejwt.tokens import RefreshToken
 
 @api_view(['POST'])
 def login_view(request):
@@ -28,4 +29,12 @@ def login_view(request):
 
 @api_view(['POST'])
 def logout_view(request):
-    return Response({"message": "Logout successful"},status=status.HTTP_200_OK)
+    try:
+        refresh_token = request.data['refresh']
+        token = RefreshToken(refresh_token)
+        token.blacklist()
+
+        return Response({"message": "Logout successful"}, status=status.HTTP_205_RESET_CONTENT)
+    except Exception:
+        return Response({"error":"Invalid or missing refresh token"}, status=status.HTTP_400_BAD_REQUEST)
+    
