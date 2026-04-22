@@ -18,6 +18,14 @@ export interface Task {
   completed: boolean;
 }
 
+export interface Comment {
+  id?: number;
+  text: string;
+  author?: number;
+  author_username?: string;
+  task?: number;
+}
+
 export interface CreateCategoryPayload {
   name: string;
   description: string;
@@ -28,6 +36,10 @@ export interface CreateTaskPayload {
   description: string;
   category: number;
   completed?: boolean;
+}
+
+export interface CreateCommentPayload {
+  text: string;
 }
 
 export interface AuthResponse {

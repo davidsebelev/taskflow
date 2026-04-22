@@ -261,6 +261,80 @@
   font-size: 1.25rem;
 }
 
+.comments-block {
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(148, 163, 184, 0.16);
+  display: grid;
+  gap: 14px;
+}
+
+.comments-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.comments-heading h4 {
+  margin: 0;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #e2e8f0;
+}
+
+.comments-heading span {
+  display: inline-flex;
+  min-width: 30px;
+  justify-content: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(14, 165, 233, 0.14);
+  color: #bae6fd;
+  font-size: 0.78rem;
+}
+
+.comments-empty {
+  margin: 0;
+  color: #94a3b8;
+}
+
+.comment-list {
+  display: grid;
+  gap: 10px;
+}
+
+.comment-card {
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: rgba(8, 15, 28, 0.54);
+  border: 1px solid rgba(148, 163, 184, 0.14);
+}
+
+.comment-meta {
+  margin-bottom: 8px;
+}
+
+.comment-meta strong {
+  color: #f8fafc;
+  font-size: 0.9rem;
+}
+
+.comment-card p {
+  margin: 0;
+  color: #cbd5e1;
+  line-height: 1.5;
+}
+
+.comment-field textarea {
+  min-height: 92px;
+}
+
+.comment-btn {
+  justify-self: flex-start;
+}
+
 .delete-btn {
   align-self: flex-start;
 }
@@ -301,5 +375,9 @@
 
   .delete-btn {
     align-self: stretch;
+  }
+
+  .comment-btn {
+    justify-self: stretch;
   }
 }

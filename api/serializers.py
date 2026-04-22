@@ -15,13 +15,14 @@ class TagSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class CommentSerializer(serializers.ModelSerializer):
+    author_username = serializers.CharField(source='author.username', read_only=True)
+
     class Meta:
         model = Comment
-        fields = '__all__'
-        read_only_fields = ['author']
+        fields = ['id', 'text', 'author', 'author_username', 'task']
+        read_only_fields = ['author', 'author_username', 'task']
 
 class TaskSerializer(serializers.ModelSerializer):
-    
     class Meta:
         model = Task
         fields = '__all__'
@@ -41,4 +42,3 @@ class LoginSerializer(serializers.Serializer):
 class TaskStatusSerializer(serializers.Serializer):
     is_active = serializers.BooleanField()
     completed = serializers.BooleanField()
-

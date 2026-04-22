@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { ApiService } from '../../services/api';
 import { AuthService } from '../../services/auth.service';
-import { Category, Task } from '../../models/interfaces';
+import { Category, Comment, Task } from '../../models/interfaces';
 import { I18nService } from '../../i18n/i18n.service';
 import { TranslatePipe } from '../../i18n/translate.pipe';
 
@@ -19,6 +19,8 @@ import { TranslatePipe } from '../../i18n/translate.pipe';
 export class TasksComponent implements OnInit {
   tasks: Task[] = [];
   categories: Category[] = [];
+  commentsByTask: Record<number, Comment[]> = {};
+  newCommentByTask: Record<number, string> = {};
   newTaskTitle = '';
   newTaskDesc = '';
   selectedCategoryId: number | null = null;
@@ -69,6 +71,8 @@ export class TasksComponent implements OnInit {
     this.api.getTasks().subscribe({
       next: (data) => {
         this.tasks = data;
+        this.commentsByTask = {};
+        this.loadCommentsForTasks(data);
       },
       error: () => {
         this.errorMessage = this.i18n.t('tasks.errorLoadTasks');
@@ -111,9 +115,45 @@ export class TasksComponent implements OnInit {
 
   deleteTask(id: number) {
     this.api.deleteTask(id).subscribe({
-      next: () => this.loadTasks(),
+      next: () => {
+        delete this.commentsByTask[id];
+        delete this.newCommentByTask[id];
+        this.loadTasks();
+      },
       error: () => {
         this.errorMessage = this.i18n.t('tasks.errorDeleteTask');
+      }
+    });
+  }
+
+  getComments(taskId: number | undefined): Comment[] {
+    if (!taskId) {
+      return [];
+    }
+
+    return this.commentsByTask[taskId] ?? [];
+  }
+
+  createComment(taskId: number | undefined) {
+    if (!taskId) {
+      return;
+    }
+
+    const text = this.newCommentByTask[taskId]?.trim() ?? '';
+
+    if (!text) {
+      this.errorMessage = this.i18n.t('tasks.errorCommentRequired');
+      return;
+    }
+
+    this.api.createTaskComment(taskId, { text }).subscribe({
+      next: () => {
+        this.errorMessage = '';
+        this.newCommentByTask[taskId] = '';
+        this.loadComments(taskId);
+      },
+      error: (error: HttpErrorResponse) => {
+        this.errorMessage = this.getErrorMessage(error, this.i18n.t('tasks.errorCreateComment'));
       }
     });
   }
@@ -124,6 +164,25 @@ export class TasksComponent implements OnInit {
 
   logout() {
     this.auth.logout();
+  }
+
+  private loadCommentsForTasks(tasks: Task[]) {
+    tasks.forEach((task) => {
+      if (task.id) {
+        this.loadComments(task.id);
+      }
+    });
+  }
+
+  private loadComments(taskId: number) {
+    this.api.getTaskComments(taskId).subscribe({
+      next: (comments) => {
+        this.commentsByTask[taskId] = comments;
+      },
+      error: () => {
+        this.commentsByTask[taskId] = [];
+      }
+    });
   }
 
   private getErrorMessage(error: HttpErrorResponse, fallbackMessage: string): string {

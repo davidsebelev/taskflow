@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Category, CreateCategoryPayload, CreateTaskPayload, Task } from '../models/interfaces';
+import { Category, Comment, CreateCategoryPayload, CreateCommentPayload, CreateTaskPayload, Task } from '../models/interfaces';
 
 @Injectable({ providedIn: 'root' })
 export class ApiService {
@@ -26,5 +26,13 @@ export class ApiService {
 
   deleteTask(id: number) {
     return this.http.delete(`${this.apiUrl}/tasks/${id}/`);
+  }
+
+  getTaskComments(taskId: number) {
+    return this.http.get<Comment[]>(`${this.apiUrl}/tasks/${taskId}/comments/`);
+  }
+
+  createTaskComment(taskId: number, payload: CreateCommentPayload) {
+    return this.http.post<Comment>(`${this.apiUrl}/tasks/${taskId}/comments/`, payload);
   }
 }

@@ -104,6 +104,45 @@
 
                 <h3>{{ task.title }}</h3>
                 <p>{{ task.description || ('tasks.noDescription' | t) }}</p>
+
+                <section class="comments-block">
+                  <div class="comments-heading">
+                    <h4>{{ 'tasks.commentsTitle' | t }}</h4>
+                    <span>{{ getComments(task.id).length }}</span>
+                  </div>
+
+                  @if (getComments(task.id).length === 0) {
+                    <p class="comments-empty">{{ 'tasks.noComments' | t }}</p>
+                  } @else {
+                    <div class="comment-list">
+                      @for (comment of getComments(task.id); track comment.id) {
+                        <article class="comment-card">
+                          <div class="comment-meta">
+                            <strong>{{ comment.author_username || ('tasks.commentAuthorFallback' | t) }}</strong>
+                          </div>
+                          <p>{{ comment.text }}</p>
+                        </article>
+                      }
+                    </div>
+                  }
+
+                  <label class="field comment-field">
+                    <span>{{ 'tasks.addCommentLabel' | t }}</span>
+                    <textarea
+                      [(ngModel)]="newCommentByTask[task.id!]"
+                      [placeholder]="'tasks.addCommentPlaceholder' | t"
+                    ></textarea>
+                  </label>
+
+                  <button
+                    class="ghost-btn comment-btn"
+                    type="button"
+                    (click)="createComment(task.id)"
+                    [disabled]="!(newCommentByTask[task.id!] || '').trim()"
+                  >
+                    {{ 'tasks.addComment' | t }}
+                  </button>
+                </section>
               </div>
 
               <button class="delete-btn" type="button" (click)="deleteTask(task.id!)">{{ 'tasks.delete' | t }}</button>

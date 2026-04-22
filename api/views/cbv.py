@@ -3,8 +3,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.shortcuts import get_object_or_404
 
-from ..models import Task, Category
-from ..serializers import TaskSerializer, CategorySerializer
+from ..models import Task, Category, Comment
+from ..serializers import TaskSerializer, CategorySerializer, CommentSerializer
 
 from rest_framework.permissions import IsAuthenticated
 
@@ -44,6 +44,7 @@ class TaskListApiView(APIView):
 
 class TaskApiDetailView(APIView):
     permission_classes = [IsAuthenticated]
+
     def get_object(self, task_id, user):
         return get_object_or_404(Task, pk = task_id, author=user)
     
@@ -67,3 +68,24 @@ class TaskApiDetailView(APIView):
         task = self.get_object(task_id, request.user)
         task.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class TaskCommentsListCreateApiView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get_task(self, task_id, user):
+        return get_object_or_404(Task, pk=task_id, author=user)
+
+    def get(self, request, task_id):
+        task = self.get_task(task_id, request.user)
+        comments = Comment.objects.filter(task=task).select_related('author').order_by('id')
+        serializer = CommentSerializer(comments, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, task_id):
+        task = self.get_task(task_id, request.user)
+        serializer = CommentSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(author=request.user, task=task)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
