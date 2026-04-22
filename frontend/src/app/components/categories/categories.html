@@ -1,0 +1,68 @@
+<section class="category-shell">
+  <div class="category-backdrop"></div>
+
+  <header class="category-header">
+    <div>
+      <p class="eyebrow">Structure</p>
+      <h1>Категории</h1>
+      <p class="header-copy">Нормальный экран управления категориями в том же стиле, что и список задач.</p>
+    </div>
+
+    <a class="back-link" routerLink="/tasks">К задачам</a>
+  </header>
+
+  <section class="category-grid">
+    <article class="category-panel">
+      <div class="panel-heading">
+        <p class="panel-kicker">Новая категория</p>
+        <h2>Добавить раздел</h2>
+      </div>
+
+      <div class="form-grid">
+        <label class="field">
+          <span>Название</span>
+          <input [(ngModel)]="name" placeholder="Например, Дизайн" />
+        </label>
+
+        <label class="field">
+          <span>Описание</span>
+          <textarea [(ngModel)]="description" placeholder="Для чего нужна эта категория"></textarea>
+        </label>
+
+        <button class="primary-btn" type="button" (click)="createCategory()" [disabled]="!name.trim()">
+          Создать категорию
+        </button>
+      </div>
+
+      @if (errorMessage) {
+        <p class="message error">{{ errorMessage }}</p>
+      }
+    </article>
+
+    <article class="category-panel list-panel">
+      <div class="panel-heading">
+        <p class="panel-kicker">Каталог</p>
+        <h2>Все категории</h2>
+      </div>
+
+      @if (categories.length === 0) {
+        <div class="empty-state">
+          <h3>Категорий пока нет</h3>
+          <p>Создай первую, чтобы задачи можно было распределять по смыслу.</p>
+        </div>
+      } @else {
+        <div class="category-list">
+          @for (category of categories; track category.id) {
+            <article class="category-card">
+              <div class="category-index">0{{ $index + 1 }}</div>
+              <div class="category-copy">
+                <h3>{{ category.name }}</h3>
+                <p>{{ category.description || 'Описание не указано.' }}</p>
+              </div>
+            </article>
+          }
+        </div>
+      }
+    </article>
+  </section>
+</section>

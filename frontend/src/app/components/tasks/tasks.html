@@ -1,0 +1,116 @@
+<section class="dashboard-shell">
+  <div class="dashboard-backdrop"></div>
+
+  <header class="dashboard-header">
+    <div>
+      <p class="eyebrow">Task flow</p>
+      <h1>Рабочая панель задач</h1>
+      <p class="header-copy">Нормальная рабочая зона вместо набора голых инпутов и ссылок.</p>
+    </div>
+
+    <div class="header-actions">
+      <a class="secondary-btn" routerLink="/categories">Категории</a>
+      <button class="ghost-btn" type="button" (click)="logout()">Выйти</button>
+    </div>
+  </header>
+
+  <section class="stats-grid">
+    <article class="stat-card">
+      <span class="stat-label">Всего задач</span>
+      <strong>{{ tasks.length }}</strong>
+    </article>
+
+    <article class="stat-card">
+      <span class="stat-label">Категорий</span>
+      <strong>{{ categories.length }}</strong>
+    </article>
+
+    <article class="stat-card">
+      <span class="stat-label">Найдено по фильтру</span>
+      <strong>{{ filteredTasks.length }}</strong>
+    </article>
+  </section>
+
+  <section class="content-grid">
+    <article class="panel compose-panel">
+      <div class="panel-heading">
+        <p class="panel-kicker">Новая запись</p>
+        <h2>Создать задачу</h2>
+      </div>
+
+      <div class="form-grid">
+        <label class="field">
+          <span>Название</span>
+          <input [(ngModel)]="newTaskTitle" placeholder="Например, подготовить спринт" />
+        </label>
+
+        <label class="field">
+          <span>Описание</span>
+          <textarea [(ngModel)]="newTaskDesc" placeholder="Что именно нужно сделать и зачем"></textarea>
+        </label>
+
+        <label class="field">
+          <span>Категория</span>
+          <select [(ngModel)]="selectedCategoryId">
+            <option [ngValue]="null">Выбери категорию</option>
+            @for (category of categories; track category.id) {
+              <option [ngValue]="category.id">{{ category.name }}</option>
+            }
+          </select>
+        </label>
+
+        <button class="primary-btn" type="button" (click)="createTask()" [disabled]="!newTaskTitle.trim() || !selectedCategoryId">
+          Добавить задачу
+        </button>
+      </div>
+
+      @if (errorMessage) {
+        <p class="message error">{{ errorMessage }}</p>
+      }
+    </article>
+
+    <article class="panel list-panel">
+      <div class="list-topbar">
+        <div class="panel-heading">
+          <p class="panel-kicker">Список</p>
+          <h2>Текущие задачи</h2>
+        </div>
+
+        <label class="search-field">
+          <span>Поиск</span>
+          <input [(ngModel)]="searchQuery" placeholder="Фильтр по задаче или категории" />
+        </label>
+      </div>
+
+      @if (tasks.length === 0) {
+        <div class="empty-state">
+          <h3>Пока пусто</h3>
+          <p>Создай первую задачу, и список начнёт выглядеть как рабочий инструмент.</p>
+        </div>
+      } @else if (filteredTasks.length === 0) {
+        <div class="empty-state">
+          <h3>Ничего не найдено</h3>
+          <p>Попробуй другой запрос или очисти фильтр.</p>
+        </div>
+      } @else {
+        <div class="task-list">
+          @for (task of filteredTasks; track task.id) {
+            <article class="task-card">
+              <div class="task-copy">
+                <div class="task-meta">
+                  <span class="task-badge">{{ getCategoryName(task.category) }}</span>
+                  <span class="task-status">{{ task.completed ? 'Done' : 'In progress' }}</span>
+                </div>
+
+                <h3>{{ task.title }}</h3>
+                <p>{{ task.description || 'Описание не указано.' }}</p>
+              </div>
+
+              <button class="delete-btn" type="button" (click)="deleteTask(task.id!)">Удалить</button>
+            </article>
+          }
+        </div>
+      }
+    </article>
+  </section>
+</section>
