@@ -3,34 +3,34 @@
 
   <header class="category-header">
     <div>
-      <p class="eyebrow">Structure</p>
-      <h1>Категории</h1>
-      <p class="header-copy">Нормальный экран управления категориями в том же стиле, что и список задач.</p>
+      <p class="eyebrow">{{ 'categories.eyebrow' | t }}</p>
+      <h1>{{ 'categories.title' | t }}</h1>
+      <p class="header-copy">{{ 'categories.headerCopy' | t }}</p>
     </div>
 
-    <a class="back-link" routerLink="/tasks">К задачам</a>
+    <a class="back-link" routerLink="/tasks">{{ 'categories.backToTasks' | t }}</a>
   </header>
 
   <section class="category-grid">
     <article class="category-panel">
       <div class="panel-heading">
-        <p class="panel-kicker">Новая категория</p>
-        <h2>Добавить раздел</h2>
+        <p class="panel-kicker">{{ 'categories.newCategory' | t }}</p>
+        <h2>{{ 'categories.addSection' | t }}</h2>
       </div>
 
       <div class="form-grid">
         <label class="field">
-          <span>Название</span>
-          <input [(ngModel)]="name" placeholder="Например, Дизайн" />
+          <span>{{ 'categories.name' | t }}</span>
+          <input [(ngModel)]="name" [placeholder]="'categories.namePlaceholder' | t" />
         </label>
 
         <label class="field">
-          <span>Описание</span>
-          <textarea [(ngModel)]="description" placeholder="Для чего нужна эта категория"></textarea>
+          <span>{{ 'categories.description' | t }}</span>
+          <textarea [(ngModel)]="description" [placeholder]="'categories.descriptionPlaceholder' | t"></textarea>
         </label>
 
         <button class="primary-btn" type="button" (click)="createCategory()" [disabled]="!name.trim()">
-          Создать категорию
+          {{ 'categories.create' | t }}
         </button>
       </div>
 
@@ -41,14 +41,14 @@
 
     <article class="category-panel list-panel">
       <div class="panel-heading">
-        <p class="panel-kicker">Каталог</p>
-        <h2>Все категории</h2>
+        <p class="panel-kicker">{{ 'categories.catalog' | t }}</p>
+        <h2>{{ 'categories.all' | t }}</h2>
       </div>
 
       @if (categories.length === 0) {
         <div class="empty-state">
-          <h3>Категорий пока нет</h3>
-          <p>Создай первую, чтобы задачи можно было распределять по смыслу.</p>
+          <h3>{{ 'categories.emptyTitle' | t }}</h3>
+          <p>{{ 'categories.emptyText' | t }}</p>
         </div>
       } @else {
         <div class="category-list">
@@ -57,7 +57,7 @@
               <div class="category-index">0{{ $index + 1 }}</div>
               <div class="category-copy">
                 <h3>{{ category.name }}</h3>
-                <p>{{ category.description || 'Описание не указано.' }}</p>
+                <p>{{ category.description || ('categories.noDescription' | t) }}</p>
               </div>
             </article>
           }

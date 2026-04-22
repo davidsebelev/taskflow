@@ -1,19 +1,19 @@
 <div class="login-page">
   <div class="login-card">
     <div class="logo-box">✔</div>
-    <h1>Welcome Back</h1>
-    <p>Please enter your details to sign in</p>
+    <h1>{{ 'login.title' | t }}</h1>
+    <p>{{ 'login.subtitle' | t }}</p>
     
     <div class="field">
-      <label>Username</label>
-      <input [(ngModel)]="username" type="text" placeholder="Your username">
+      <label>{{ 'login.username' | t }}</label>
+      <input [(ngModel)]="username" type="text" [placeholder]="'login.usernamePlaceholder' | t">
     </div>
 
     <div class="field">
-      <label>Password</label>
+      <label>{{ 'login.password' | t }}</label>
       <input [(ngModel)]="password" type="password" placeholder="••••••••">
     </div>
 
-    <button class="submit-btn" (click)="onLogin()">Sign In</button>
+    <button class="submit-btn" (click)="onLogin()">{{ 'login.signIn' | t }}</button>
   </div>
 </div>

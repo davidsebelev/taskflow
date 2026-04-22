@@ -1,3 +1,16 @@
 <div class="main-wrapper">
+  <div class="language-switcher">
+    <label for="language-select">{{ 'language.label' | t }}</label>
+    <select
+      id="language-select"
+      [value]="i18n.language()"
+      (change)="setLanguage($any($event.target).value)"
+    >
+      <option value="en">{{ 'language.en' | t }}</option>
+      <option value="ru">{{ 'language.ru' | t }}</option>
+      <option value="kk">{{ 'language.kk' | t }}</option>
+    </select>
+  </div>
+
   <router-outlet></router-outlet>
 </div>

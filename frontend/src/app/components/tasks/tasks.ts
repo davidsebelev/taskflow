@@ -6,11 +6,13 @@ import { RouterLink } from '@angular/router';
 import { ApiService } from '../../services/api';
 import { AuthService } from '../../services/auth.service';
 import { Category, Task } from '../../models/interfaces';
+import { I18nService } from '../../i18n/i18n.service';
+import { TranslatePipe } from '../../i18n/translate.pipe';
 
 @Component({
   selector: 'app-tasks',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule, RouterLink, TranslatePipe],
   templateUrl: './tasks.html',
   styleUrl: './tasks.css'
 })
@@ -23,7 +25,7 @@ export class TasksComponent implements OnInit {
   searchQuery = '';
   errorMessage = '';
 
-  constructor(private api: ApiService, private auth: AuthService) {}
+  constructor(private api: ApiService, private auth: AuthService, private i18n: I18nService) {}
 
   get filteredTasks(): Task[] {
     const query = this.searchQuery.trim().toLowerCase();
@@ -58,7 +60,7 @@ export class TasksComponent implements OnInit {
         }
       },
       error: () => {
-        this.errorMessage = 'Не удалось загрузить категории.';
+        this.errorMessage = this.i18n.t('tasks.errorLoadCategories');
       }
     });
   }
@@ -69,7 +71,7 @@ export class TasksComponent implements OnInit {
         this.tasks = data;
       },
       error: () => {
-        this.errorMessage = 'Не удалось загрузить задачи.';
+        this.errorMessage = this.i18n.t('tasks.errorLoadTasks');
       }
     });
   }
@@ -79,12 +81,12 @@ export class TasksComponent implements OnInit {
     const description = this.newTaskDesc.trim();
 
     if (!title) {
-      this.errorMessage = 'Название задачи обязательно.';
+      this.errorMessage = this.i18n.t('tasks.errorTitleRequired');
       return;
     }
 
     if (!this.selectedCategoryId) {
-      this.errorMessage = 'Сначала создай хотя бы одну категорию.';
+      this.errorMessage = this.i18n.t('tasks.errorNeedCategory');
       return;
     }
 
@@ -102,7 +104,7 @@ export class TasksComponent implements OnInit {
         this.newTaskDesc = '';
       },
       error: (error: HttpErrorResponse) => {
-        this.errorMessage = this.getErrorMessage(error, 'Не удалось создать задачу.');
+        this.errorMessage = this.getErrorMessage(error, this.i18n.t('tasks.errorCreateTask'));
       }
     });
   }
@@ -111,13 +113,13 @@ export class TasksComponent implements OnInit {
     this.api.deleteTask(id).subscribe({
       next: () => this.loadTasks(),
       error: () => {
-        this.errorMessage = 'Не удалось удалить задачу.';
+        this.errorMessage = this.i18n.t('tasks.errorDeleteTask');
       }
     });
   }
 
   getCategoryName(categoryId: number): string {
-    return this.categories.find((category) => category.id === categoryId)?.name ?? 'Без категории';
+    return this.categories.find((category) => category.id === categoryId)?.name ?? this.i18n.t('tasks.noCategory');
   }
 
   logout() {

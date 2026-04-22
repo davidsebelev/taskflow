@@ -5,11 +5,13 @@ import { FormsModule } from '@angular/forms';
 import { ApiService } from '../../services/api';
 import { Category } from '../../models/interfaces';
 import { RouterLink } from '@angular/router';
+import { I18nService } from '../../i18n/i18n.service';
+import { TranslatePipe } from '../../i18n/translate.pipe';
 
 @Component({
   selector: 'app-categories',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule, RouterLink, TranslatePipe],
   templateUrl: './categories.html',
   styleUrl: './categories.css'
 })
@@ -19,7 +21,7 @@ export class CategoriesComponent implements OnInit {
   description = '';
   errorMessage = '';
 
-  constructor(private api: ApiService) {}
+  constructor(private api: ApiService, private i18n: I18nService) {}
 
   ngOnInit() {
     this.loadCategories();
@@ -31,7 +33,7 @@ export class CategoriesComponent implements OnInit {
         this.categories = data;
       },
       error: () => {
-        this.errorMessage = 'Не удалось загрузить категории.';
+        this.errorMessage = this.i18n.t('categories.errorLoad');
       }
     });
   }
@@ -41,7 +43,7 @@ export class CategoriesComponent implements OnInit {
     const description = this.description.trim();
 
     if (!name) {
-      this.errorMessage = 'Название категории обязательно.';
+      this.errorMessage = this.i18n.t('categories.errorNameRequired');
       return;
     }
 
@@ -56,7 +58,7 @@ export class CategoriesComponent implements OnInit {
         this.errorMessage = '';
       },
       error: (error: HttpErrorResponse) => {
-        this.errorMessage = this.getErrorMessage(error, 'Не удалось создать категорию.');
+        this.errorMessage = this.getErrorMessage(error, this.i18n.t('categories.errorCreate'));
       }
     });
   }

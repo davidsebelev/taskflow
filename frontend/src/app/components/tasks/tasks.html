@@ -3,30 +3,30 @@
 
   <header class="dashboard-header">
     <div>
-      <p class="eyebrow">Task flow</p>
-      <h1>Рабочая панель задач</h1>
-      <p class="header-copy">Нормальная рабочая зона вместо набора голых инпутов и ссылок.</p>
+      <p class="eyebrow">{{ 'tasks.eyebrow' | t }}</p>
+      <h1>{{ 'tasks.title' | t }}</h1>
+      <p class="header-copy">{{ 'tasks.headerCopy' | t }}</p>
     </div>
 
     <div class="header-actions">
-      <a class="secondary-btn" routerLink="/categories">Категории</a>
-      <button class="ghost-btn" type="button" (click)="logout()">Выйти</button>
+      <a class="secondary-btn" routerLink="/categories">{{ 'tasks.categories' | t }}</a>
+      <button class="ghost-btn" type="button" (click)="logout()">{{ 'tasks.logout' | t }}</button>
     </div>
   </header>
 
   <section class="stats-grid">
     <article class="stat-card">
-      <span class="stat-label">Всего задач</span>
+      <span class="stat-label">{{ 'tasks.statsTotal' | t }}</span>
       <strong>{{ tasks.length }}</strong>
     </article>
 
     <article class="stat-card">
-      <span class="stat-label">Категорий</span>
+      <span class="stat-label">{{ 'tasks.statsCategories' | t }}</span>
       <strong>{{ categories.length }}</strong>
     </article>
 
     <article class="stat-card">
-      <span class="stat-label">Найдено по фильтру</span>
+      <span class="stat-label">{{ 'tasks.statsFiltered' | t }}</span>
       <strong>{{ filteredTasks.length }}</strong>
     </article>
   </section>
@@ -34,25 +34,25 @@
   <section class="content-grid">
     <article class="panel compose-panel">
       <div class="panel-heading">
-        <p class="panel-kicker">Новая запись</p>
-        <h2>Создать задачу</h2>
+        <p class="panel-kicker">{{ 'tasks.newEntry' | t }}</p>
+        <h2>{{ 'tasks.createTask' | t }}</h2>
       </div>
 
       <div class="form-grid">
         <label class="field">
-          <span>Название</span>
-          <input [(ngModel)]="newTaskTitle" placeholder="Например, подготовить спринт" />
+          <span>{{ 'tasks.name' | t }}</span>
+          <input [(ngModel)]="newTaskTitle" [placeholder]="'tasks.namePlaceholder' | t" />
         </label>
 
         <label class="field">
-          <span>Описание</span>
-          <textarea [(ngModel)]="newTaskDesc" placeholder="Что именно нужно сделать и зачем"></textarea>
+          <span>{{ 'tasks.description' | t }}</span>
+          <textarea [(ngModel)]="newTaskDesc" [placeholder]="'tasks.descriptionPlaceholder' | t"></textarea>
         </label>
 
         <label class="field">
-          <span>Категория</span>
+          <span>{{ 'tasks.category' | t }}</span>
           <select [(ngModel)]="selectedCategoryId">
-            <option [ngValue]="null">Выбери категорию</option>
+            <option [ngValue]="null">{{ 'tasks.chooseCategory' | t }}</option>
             @for (category of categories; track category.id) {
               <option [ngValue]="category.id">{{ category.name }}</option>
             }
@@ -60,7 +60,7 @@
         </label>
 
         <button class="primary-btn" type="button" (click)="createTask()" [disabled]="!newTaskTitle.trim() || !selectedCategoryId">
-          Добавить задачу
+          {{ 'tasks.addTask' | t }}
         </button>
       </div>
 
@@ -72,25 +72,25 @@
     <article class="panel list-panel">
       <div class="list-topbar">
         <div class="panel-heading">
-          <p class="panel-kicker">Список</p>
-          <h2>Текущие задачи</h2>
+          <p class="panel-kicker">{{ 'tasks.list' | t }}</p>
+          <h2>{{ 'tasks.currentTasks' | t }}</h2>
         </div>
 
         <label class="search-field">
-          <span>Поиск</span>
-          <input [(ngModel)]="searchQuery" placeholder="Фильтр по задаче или категории" />
+          <span>{{ 'tasks.search' | t }}</span>
+          <input [(ngModel)]="searchQuery" [placeholder]="'tasks.searchPlaceholder' | t" />
         </label>
       </div>
 
       @if (tasks.length === 0) {
         <div class="empty-state">
-          <h3>Пока пусто</h3>
-          <p>Создай первую задачу, и список начнёт выглядеть как рабочий инструмент.</p>
+          <h3>{{ 'tasks.emptyTitle' | t }}</h3>
+          <p>{{ 'tasks.emptyText' | t }}</p>
         </div>
       } @else if (filteredTasks.length === 0) {
         <div class="empty-state">
-          <h3>Ничего не найдено</h3>
-          <p>Попробуй другой запрос или очисти фильтр.</p>
+          <h3>{{ 'tasks.notFoundTitle' | t }}</h3>
+          <p>{{ 'tasks.notFoundText' | t }}</p>
         </div>
       } @else {
         <div class="task-list">
@@ -99,14 +99,14 @@
               <div class="task-copy">
                 <div class="task-meta">
                   <span class="task-badge">{{ getCategoryName(task.category) }}</span>
-                  <span class="task-status">{{ task.completed ? 'Done' : 'In progress' }}</span>
+                  <span class="task-status">{{ task.completed ? ('tasks.done' | t) : ('tasks.inProgress' | t) }}</span>
                 </div>
 
                 <h3>{{ task.title }}</h3>
-                <p>{{ task.description || 'Описание не указано.' }}</p>
+                <p>{{ task.description || ('tasks.noDescription' | t) }}</p>
               </div>
 
-              <button class="delete-btn" type="button" (click)="deleteTask(task.id!)">Удалить</button>
+              <button class="delete-btn" type="button" (click)="deleteTask(task.id!)">{{ 'tasks.delete' | t }}</button>
             </article>
           }
         </div>
