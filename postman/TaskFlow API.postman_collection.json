@@ -1,0 +1,617 @@
+{
+  "info": {
+    "_postman_id": "820af67f-21a3-4df3-a108-7e5e7f906eb7",
+    "name": "TaskFlow API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "53683246",
+    "_collection_link": "https://go.postman.co/collection/53683246-820af67f-21a3-4df3-a108-7e5e7f906eb7?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Login",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": [
+        {
+          "name": "Login",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"david\",\n  \"password\": \"12345\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/token/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "token",
+                ""
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Wed, 22 Apr 2026 06:05:35 GMT"
+            },
+            {
+              "key": "Server",
+              "value": "WSGIServer/0.2 CPython/3.13.9"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Vary",
+              "value": "Accept, origin"
+            },
+            {
+              "key": "Allow",
+              "value": "POST, OPTIONS"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Length",
+              "value": "489"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"refresh\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc3NzQ0MjczNSwiaWF0IjoxNzc2ODM3OTM1LCJqdGkiOiI1Mjg3ZTIxN2M1ZDg0MDhjYTlhM2FjMzQ5MjZlZjYyMCIsInVzZXJfaWQiOiIxIn0.Fml_f1Sy5GhXjuf5KxNS11BMkoOZfN3zubgjCa-ncEs\",\n    \"access\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzc2ODQxNTM1LCJpYXQiOjE3NzY4Mzc5MzUsImp0aSI6IjE1ODlhZmVmNmM5YzRiODFiZjM5ZGEyMmEyNDA2YTUxIiwidXNlcl9pZCI6IjEifQ.9pWu9nnPv5LntuQKGk0k-STec5JttiplT6MYwBGNoOM\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Logout",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": [
+        {
+          "name": "Logout",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"refresh\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc3NzQ0MjczNSwiaWF0IjoxNzc2ODM3OTM1LCJqdGkiOiI1Mjg3ZTIxN2M1ZDg0MDhjYTlhM2FjMzQ5MjZlZjYyMCIsInVzZXJfaWQiOiIxIn0.Fml_f1Sy5GhXjuf5KxNS11BMkoOZfN3zubgjCa-ncEs\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/logout/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "logout",
+                ""
+              ]
+            }
+          },
+          "status": "Reset Content",
+          "code": 205,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Wed, 22 Apr 2026 06:06:50 GMT"
+            },
+            {
+              "key": "Server",
+              "value": "WSGIServer/0.2 CPython/3.13.9"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Vary",
+              "value": "Accept, origin"
+            },
+            {
+              "key": "Allow",
+              "value": "POST, OPTIONS"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Length",
+              "value": "31"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"message\": \"Logout successful\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Get tasks",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": [
+        {
+          "name": "Get tasks",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/tasks/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "tasks",
+                ""
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Wed, 22 Apr 2026 06:08:04 GMT"
+            },
+            {
+              "key": "Server",
+              "value": "WSGIServer/0.2 CPython/3.13.9"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Vary",
+              "value": "Accept, origin"
+            },
+            {
+              "key": "Allow",
+              "value": "GET, POST, HEAD, OPTIONS"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Length",
+              "value": "306"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin"
+            }
+          ],
+          "cookie": [],
+          "body": "[\n    {\n        \"id\": 8,\n        \"title\": \"сделать домашку по казахскому\",\n        \"description\": \"домашку\",\n        \"is_active\": true,\n        \"completed\": false,\n        \"author\": 1,\n        \"category\": 2,\n        \"tags\": []\n    },\n    {\n        \"id\": 9,\n        \"title\": \"Домашка\",\n        \"description\": \"ниуии\",\n        \"is_active\": true,\n        \"completed\": false,\n        \"author\": 1,\n        \"category\": 5,\n        \"tags\": []\n    }\n]"
+        }
+      ]
+    },
+    {
+      "name": "Create tasks",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": [
+        {
+          "name": "Create tasks",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Test task\",\n  \"description\": \"First task\",\n  \"category\": 2,\n  \"tags\": []\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/tasks/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "tasks",
+                ""
+              ]
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Wed, 22 Apr 2026 06:09:11 GMT"
+            },
+            {
+              "key": "Server",
+              "value": "WSGIServer/0.2 CPython/3.13.9"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Vary",
+              "value": "Accept, origin"
+            },
+            {
+              "key": "Allow",
+              "value": "GET, POST, HEAD, OPTIONS"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Length",
+              "value": "125"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"id\": 10,\n    \"title\": \"Test task\",\n    \"description\": \"First task\",\n    \"is_active\": true,\n    \"completed\": false,\n    \"author\": 1,\n    \"category\": 2,\n    \"tags\": []\n}"
+        }
+      ]
+    },
+    {
+      "name": "Get one task",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": [
+        {
+          "name": "Get one task",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/tasks/10/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "tasks",
+                "10",
+                ""
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Wed, 22 Apr 2026 06:10:12 GMT"
+            },
+            {
+              "key": "Server",
+              "value": "WSGIServer/0.2 CPython/3.13.9"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Vary",
+              "value": "Accept, origin"
+            },
+            {
+              "key": "Allow",
+              "value": "GET, PUT, DELETE, HEAD, OPTIONS"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Length",
+              "value": "125"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"id\": 10,\n    \"title\": \"Test task\",\n    \"description\": \"First task\",\n    \"is_active\": true,\n    \"completed\": false,\n    \"author\": 1,\n    \"category\": 2,\n    \"tags\": []\n}"
+        }
+      ]
+    },
+    {
+      "name": "Update task",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": [
+        {
+          "name": "Update task",
+          "originalRequest": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Updated task\",\n  \"description\": \"Updated description\",\n  \"category\": 2,\n  \"tags\": [],\n  \"is_active\": true,\n  \"completed\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/tasks/9/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "tasks",
+                "9",
+                ""
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Wed, 22 Apr 2026 06:11:53 GMT"
+            },
+            {
+              "key": "Server",
+              "value": "WSGIServer/0.2 CPython/3.13.9"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Vary",
+              "value": "Accept, origin"
+            },
+            {
+              "key": "Allow",
+              "value": "GET, PUT, DELETE, HEAD, OPTIONS"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Length",
+              "value": "135"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"id\": 9,\n    \"title\": \"Updated task\",\n    \"description\": \"Updated description\",\n    \"is_active\": true,\n    \"completed\": true,\n    \"author\": 1,\n    \"category\": 2,\n    \"tags\": []\n}"
+        }
+      ]
+    },
+    {
+      "name": "Delete task",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": [
+        {
+          "name": "Delete task",
+          "originalRequest": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/tasks/10/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "tasks",
+                "10",
+                ""
+              ]
+            }
+          },
+          "status": "No Content",
+          "code": 204,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Wed, 22 Apr 2026 06:12:19 GMT"
+            },
+            {
+              "key": "Server",
+              "value": "WSGIServer/0.2 CPython/3.13.9"
+            },
+            {
+              "key": "Vary",
+              "value": "Accept, origin"
+            },
+            {
+              "key": "Allow",
+              "value": "GET, PUT, DELETE, HEAD, OPTIONS"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Length",
+              "value": "0"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin"
+            }
+          ],
+          "cookie": [],
+          "body": null
+        }
+      ]
+    }
+  ]
+}
