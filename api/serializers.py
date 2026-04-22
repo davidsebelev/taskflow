@@ -6,6 +6,7 @@ class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = '__all__'
+        read_only_fields = ['author']
 
 
 class TagSerializer(serializers.ModelSerializer):
@@ -17,6 +18,7 @@ class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = '__all__'
+        read_only_fields = ['author']
 
 class TaskSerializer(serializers.ModelSerializer):
     
@@ -39,5 +41,4 @@ class LoginSerializer(serializers.Serializer):
 class TaskStatusSerializer(serializers.Serializer):
     is_active = serializers.BooleanField()
     completed = serializers.BooleanField()
-
 
